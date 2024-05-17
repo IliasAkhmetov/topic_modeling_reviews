@@ -126,7 +126,7 @@ class WebScrap_and_save:
 
 dotenv.load_dotenv() # Обращаемся к скрытой ссылке
 url = os.getenv('MY_HIDDEN_URL') # Подаем ссылку
-start_page = 24 # Передаем начальную страницу для начала скрапинга
+start_page = 30 # Передаем начальную страницу для начала скрапинга
 end_page = 100 # Передаем конечную страницу для скрапинга
 specific_name = 'with_photo_useful' # Передаем спецификацию названия файла с данными
 reviews_data = WebScrap_and_save(url, start_page, end_page, specific_name)
