@@ -5,6 +5,8 @@ import re
 import time
 import random
 import csv
+import os
+import dotenv
 
 # Парсинг отзывов с 1 по 100 странице сортированные по полезности, позитивные, негативные, нейтральные
 
@@ -21,7 +23,7 @@ class WebScrap_and_save:
             if output_file.tell() == 0:  # Если файл пустой, пишем заголовки
                 dict_writer.writeheader()
             dict_writer.writerows(batch_data)
-    def parsing_yandex_market(self):
+    def web_scraping(self):
         base_url = self.url
         driver = webdriver.Chrome()
         time.sleep(random.uniform(1.5, 3.5))
@@ -122,9 +124,10 @@ class WebScrap_and_save:
             self.save_to_csv(batch_data, f'../data/{self.specific_name}_reviews.csv')
         driver.quit()
 
-url = 'https://market.yandex.ru/product--iphone-14/1768753750/reviews?sku=101960159735&uniqueId=117959627&do-waremd5=gThrjSWcXjyM0WmPYL-9pQ&grade_value=3&grade_value=4&page='
-start_page = 1
-end_page = 26
-specific_name = 'neutral'
+dotenv.load_dotenv() # Обращаемся к скрытой ссылке
+url = os.getenv('MY_HIDDEN_URL') # Подаем ссылку
+start_page = 1 # Передаем начальную страницу для начала скрапинга
+end_page = 2 # Передаем конечную страницу для скрапинга
+specific_name = 'useful_2' # Передаем спецификацию названия файла с данными
 reviews_data = WebScrap_and_save(url, start_page, end_page, specific_name)
-reviews_data.parsing_yandex_market()
+reviews_data.web_scraping()
