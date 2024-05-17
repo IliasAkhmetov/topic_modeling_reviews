@@ -6,7 +6,7 @@ import time
 import random
 import csv
 
-# Парсинг отзывов с 1 по 100 странице сортированные по полезности
+# Парсинг отзывов с 1 по 100 странице сортированные по полезности, позитивные, негативные, нейтральные
 
 class WebScrap_and_save:
     def __init__(self, url, start_page, end_page, specific_name):
@@ -122,9 +122,9 @@ class WebScrap_and_save:
             self.save_to_csv(batch_data, f'../data/{self.specific_name}_reviews.csv')
         driver.quit()
 
-url = 'https://market.yandex.ru/product--iphone-14/1768753750/reviews?sku=101960159735&uniqueId=117959627&do-waremd5=gThrjSWcXjyM0WmPYL-9pQ&page='
+url = 'https://market.yandex.ru/product--iphone-14/1768753750/reviews?sku=101960159735&uniqueId=117959627&do-waremd5=gThrjSWcXjyM0WmPYL-9pQ&grade_value=3&grade_value=4&page='
 start_page = 1
-end_page = 100
-specific_name = 'useful'
+end_page = 26
+specific_name = 'neutral'
 reviews_data = WebScrap_and_save(url, start_page, end_page, specific_name)
 reviews_data.parsing_yandex_market()
